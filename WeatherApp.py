@@ -27,9 +27,12 @@ class Weather:
         #ignore requests when input is missing or incorrect
         if(requests.get(api).json() != {'cod': '400', 'message': 'Nothing to geocode'} and requests.get(api).json() != {'cod': '404', 'message': 'city not found'}):
             self.data = requests.get(api).json()
+            print(self.data["weather"][0]['main']) #testing
             #find correct image for weather type
             if self.data["weather"][0]['main'] == "Clear":
                 img = ImageTk.PhotoImage(Image.open("Images\\clear.jpg"))
+            elif self.data["weather"][0]['main'] == "Fog":
+                img = ImageTk.PhotoImage(Image.open("Images\\fog.jpg"))
             elif self.data["weather"][0]['main'] == "Clouds":
                 img = ImageTk.PhotoImage(Image.open("Images\\cloud.jpg"))
             elif self.data["weather"][0]['main'] == "Rain":
